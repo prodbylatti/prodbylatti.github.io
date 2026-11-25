@@ -241,7 +241,19 @@ body{background:var(--night);color:var(--fg);font-family:var(--body);font-size:1
 :root[data-genre="hard"] .backdrop .tint,:root[data-genre="about"] .backdrop .tint{display:block}
 .backdrop .fxtint{position:absolute;inset:0;background:var(--led);mix-blend-mode:multiply}
 /* every section is its own opaque layer, so the colour blend behaves the same in Safari as in Chrome (no solid purple slab) */
-.backdrop .set{background:var(--night);transition:opacity .9s ease,background-color .6s}
+/* sections that are not showing are not drawn at all, so the phone only keeps one background in memory */
+.backdrop .set{background:var(--night);visibility:hidden;transition:opacity .9s ease,background-color .6s,visibility 0s linear .9s}
+.backdrop .set.on{visibility:visible;transition:opacity .9s ease,background-color .6s,visibility 0s}
+/* light HARD for phones: same red look, none of the heavy effects */
+.lite .hx{filter:none;mix-blend-mode:normal}
+.lite .hx.wall{animation:none;opacity:.32;-webkit-mask-image:none;mask-image:none;background-size:420px auto}
+.lite .hx.fig{opacity:.6;animation:jitter 5.5s steps(1) infinite}
+.lite .hx.desk{opacity:.4}
+.lite .backdrop .tint{display:none!important}
+:root.lite[data-genre="hard"] .hero::before{display:none}
+.lite .grid .beat,.lite .about-card{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@keyframes jitter{0%,88%,100%{transform:translateX(0)}90%{transform:translateX(-14px)}93%{transform:translateX(12px)}96%{transform:translateX(-6px)}}
+@media (max-width:700px){:root[data-genre="hard"] h1{font-size:clamp(26px,7.2vw,60px)}:root[data-genre="rnb"] h1,:root[data-genre="chill"] h1{font-size:clamp(26px,8.2vw,60px)}}
 /* let the header melt into the page instead of ending on a hard line */
 .hero::after{-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
 :root:not([data-genre="hard"]):not([data-genre="about"]) .backdrop::after{background:radial-gradient(130% 90% at 50% 0%,transparent 55%,color-mix(in srgb,var(--night) 65%,transparent) 100%)}
@@ -577,6 +589,9 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   const R = (a, b) => a + Math.random() * (b - a);
   const mk = (cls, parent) => { const d = document.createElement('div'); d.className = cls; parent.append(d); return d; };
   const smallScreen = innerWidth < 700;
+  // phones and tablets get a lighter HARD: no stacked filters, blend modes or glitch clones (they crash iPhone Safari)
+  const lite = innerWidth < 821 || matchMedia('(hover: none)').matches;
+  if (lite) document.documentElement.classList.add('lite');
   const FXLOOPS = {};
 
   // an oscilloscope that traces two slow Lissajous curves and fades them out as it goes
@@ -657,9 +672,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
       layer('hx wall');
       layer('hx desk', 'red-desk.jpg');
       layer('hx fig', 'red-mirror.jpg');
-      layer('hx fig g1', 'red-mirror.jpg');
-      layer('hx fig g2', 'red-mirror.jpg');
-      layer('hx sweep');
+      if (!lite) { layer('hx fig g1', 'red-mirror.jpg'); layer('hx fig g2', 'red-mirror.jpg'); layer('hx sweep'); }
     } else if (g.about) {
       layer('ph', 'about.jpg');
       const text = (cls, t) => { const d = document.createElement('div'); d.className = cls; d.textContent = t; s.append(d); };
