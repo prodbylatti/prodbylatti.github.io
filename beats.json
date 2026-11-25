@@ -1,5 +1,5 @@
 [
-  {"id":"nxl","name":"NXL","genre":"trap","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewLength":30},
+  {"id":"nxl","name":"NXL (ft. neimless)","genre":"trap","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewLength":30},
   {"id":"wunna-be-great","name":"WUNNA BE GREAT","genre":"trap","audio":"song-wunna-be-great.m4a","cover":"cover-default.jpg","duration":"2:42","previewLength":30},
   {"id":"3-stelle-ebmin-114","name":"3 STELLE","genre":"trap","audio":"clip-3-stelle-ebmin-114.mp3","cover":"cover-default.jpg","duration":"2:02","key":"Ebmin","bpm":114,"clipFrom":0,"previewLength":30,"clip":true},
   {"id":"2706-x3","name":"2706","genre":"chill","audio":"clip-2706-x3.mp3","cover":"cover-default.jpg","duration":"2:00","previewLength":40,"clipFrom":52,"clip":true},
