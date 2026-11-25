@@ -1,0 +1,78 @@
+{
+  "favourite": "plugged",
+  "facts": [
+    "Since summer 2024",
+    "FL Studio 25",
+    "Beats · collabs · covers"
+  ],
+  "bio": "I started making music in the summer of 2024, in Taranto. From the very first week, I was already experimenting with music using BandLab. However, as I started improving and developing my skills, I quickly realised that BandLab was becoming too limited for what I wanted to achieve. That's when I decided to move to FL Studio 21, which completely changed the way I approached music production. From that point onwards, my skills kept improving, and I became more confident in my sound and abilities.\n\nThe first two artists I ever collaborated with were HAINE and GOSHA. They were both there from day zero, literally growing alongside me as I started my journey in music. In fact, my very first single was released in collaboration with one of them. I also produced the entire \"N E X T UP\" EP by GOSHA.\n\nDuring that time, I also built a really strong friendship with VEXX, a fellow beat producer. We spent a lot of time together in Taranto, hanging out, making beats and working on music. Along the way, I met many other amazing artists and people, including Lamelo, Pitfall, Mercury, Oasy, Defea, TICO, NEESI, and many more. On the production side, besides VEXX, I have also collaborated with fellow producers Fox, Neimless, 1sentenza and Scasseddu. I also started hosting frequent music sessions at my house in Taranto, where we would get together, create and experiment with different sounds.\n\nOne of the more recent highlights was working with TICO on our new song, \"SENZA RITORNO\". He sent the track to a livestream hosted by FINESSE, a well-known Italian producer, who listened to it and gave positive feedback, approving the beat, mix and master. It was a great moment and a meaningful milestone in my music journey.\n\nEventually, I moved away from Taranto to Madrid, where I continue working on my music today, now using FL Studio 25. I mainly focus on producing beats, developing my sound and collaborating with artists. I also work with artists who want to record song covers, helping them with the production and recording process.",
+  "highlight": [
+    "HAINE",
+    "GOSHA",
+    "VEXX",
+    "Lamelo",
+    "Pitfall",
+    "Fox",
+    "Mercury",
+    "Oasy",
+    "Defea",
+    "BandLab",
+    "FL Studio 21",
+    "Taranto",
+    "Madrid",
+    "TICO",
+    "FINESSE",
+    "SENZA RITORNO",
+    "FL Studio 25",
+    "NEESI",
+    "N E X T UP",
+    "Neimless",
+    "1sentenza",
+    "Scasseddu"
+  ],
+  "timeline": [],
+  "artists": [
+    {
+      "name": "MERCURY",
+      "spotify": "https://open.spotify.com/artist/2kBfW8TL7PT7nQY9Oe4tLC",
+      "photo": "artist-mercury.jpg"
+    },
+    {
+      "name": "OASY",
+      "spotify": "https://open.spotify.com/artist/3YWHdxj2vSPBStr3osu443",
+      "photo": "artist-oasy.jpg"
+    },
+    {
+      "name": "DEFEA",
+      "spotify": "https://open.spotify.com/artist/0JA3U9MI8BlRjQTV6JzgJf",
+      "photo": "artist-defea.jpg"
+    },
+    {
+      "name": "TICO",
+      "spotify": "https://open.spotify.com/artist/1R3pZ9Vrr4xk5c50phYVgb",
+      "photo": "artist-tico.jpg"
+    },
+    {
+      "name": "GOSHA",
+      "spotify": "https://open.spotify.com/artist/5urUlhtNtsTUOaW6NFsZbS",
+      "photo": "artist-gosha.jpg"
+    },
+    {
+      "name": "NEESI",
+      "spotify": "https://open.spotify.com/artist/75rRNwpdOhe2LsalYGVZGd",
+      "photo": "artist-neesi.jpg"
+    },
+    {
+      "name": "LAMELO",
+      "photo": "artist-lamelo.jpg"
+    },
+    {
+      "name": "PITFALL",
+      "photo": "artist-pitfall.jpg"
+    },
+    {
+      "name": "HAINE",
+      "photo": "artist-haine.jpg"
+    }
+  ]
+}

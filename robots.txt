@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prodbylatti.github.io/sitemap.xml
