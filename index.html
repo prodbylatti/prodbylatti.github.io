@@ -238,6 +238,10 @@ body{background:var(--night);color:var(--fg);font-family:var(--body);font-size:1
 .backdrop .tint{display:none}
 :root[data-genre="hard"] .backdrop .tint,:root[data-genre="about"] .backdrop .tint{display:block}
 .backdrop .fxtint{position:absolute;inset:0;background:var(--led);mix-blend-mode:multiply}
+/* every section is its own opaque layer, so the colour blend behaves the same in Safari as in Chrome (no solid purple slab) */
+.backdrop .set{background:var(--night);transition:opacity .9s ease,background-color .6s}
+/* let the header melt into the page instead of ending on a hard line */
+.hero::after{-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
 :root:not([data-genre="hard"]):not([data-genre="about"]) .backdrop::after{background:radial-gradient(130% 90% at 50% 0%,transparent 55%,color-mix(in srgb,var(--night) 65%,transparent) 100%)}
 @media (max-width:700px){.hx.fig{width:110vw;right:-38%}.hx.desk{width:100vw;left:-40%}}
 :root[data-genre="rnb"] h1{font-family:"Syne","Arial Black",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}
