@@ -17,7 +17,7 @@
   {"id":"floating-in-space-oath-x2","name":"FLOATING IN SPACE","genre":"chill","audio":"clip-floating-in-space-oath-x2.mp3","cover":"cover-default.jpg","duration":"1:48","previewLength":45,"clipFrom":0,"clip":true},
   {"id":"i-was-wrong-gbmin-188","name":"I WAS WRONG","genre":"chill","audio":"clip-i-was-wrong-gbmin-188.mp3","cover":"cover-default.jpg","duration":"2:30","key":"Gbmin","bpm":188,"previewLength":40,"clipFrom":30,"clip":true},
   {"id":"parking-lot-x2","name":"PARKING LOT","genre":"chill","audio":"clip-parking-lot-x2.mp3","cover":"cover-default.jpg","duration":"2:12","previewLength":30,"clipFrom":27,"clip":true},
-  {"id":"thaughts","name":"THOUGHTS","genre":"chill","audio":"song-thaughts.mp3","cover":"cover-default.jpg","duration":"1:24","fullPreview":true,"noDownload":true},
+  {"id":"thaughts","name":"THOUGHTS","genre":"chill","audio":"song-thaughts.mp3","cover":"cover-default.jpg","duration":"1:24","fullPreview":true},
   {"id":"nxl","name":"NXL (FT. NEIMLESS)","genre":"collabs","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewLength":30},
   {"id":"baby-on-baby-v2","name":"BABY ON BABY (FT. VEXX)","genre":"collabs","audio":"clip-baby-on-baby-v2.mp3","cover":"cover-default.jpg","duration":"3:02","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"keyboard-x2","name":"KEYBOARD (FT. VEXX)","genre":"collabs","audio":"clip-keyboard-x2.mp3","cover":"cover-default.jpg","duration":"2:27","clipFrom":0,"previewLength":30,"clip":true},
