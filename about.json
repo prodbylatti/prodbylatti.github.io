@@ -74,5 +74,9 @@
       "name": "HAINE",
       "photo": "artist-haine.jpg"
     }
-  ]
+  ],
+  "video": {
+    "src": "video-finesse-live.mp4",
+    "poster": "video-finesse-live.jpg"
+  }
 }

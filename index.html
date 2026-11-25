@@ -291,6 +291,8 @@ h1 .at{opacity:.55;font-weight:inherit;margin-right:.02em;color:var(--fg);text-s
 .bio p{margin:0;max-width:62ch;font-size:16px}
 .soon{border:1px dashed var(--line);border-radius:var(--radius);padding:28px 18px;color:var(--dim);text-align:center}
 .fav .beat{max-width:340px}
+.about-col{display:grid;gap:22px;min-width:0;align-content:start}
+.clip-card video{display:block;width:100%;max-height:min(78vh,680px);border-radius:calc(var(--radius) * .6);background:#000;object-fit:contain}
 .artists{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:14px}
 .artist-card{display:grid;justify-items:center;text-align:center;gap:6px;padding:18px 12px 16px;border:1px solid var(--line);border-radius:var(--radius);color:var(--fg);text-decoration:none;background:color-mix(in srgb,var(--night) 55%,transparent);transition:border-color .2s,background .2s,transform .2s;min-width:0}
 a.artist-card:hover{border-color:#1ed760;background:color-mix(in srgb,#1ed760 8%,transparent);transform:translateY(-2px)}
@@ -444,7 +446,10 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   <nav class="genres" id="genres" aria-label="Genres"></nav>
   <section class="about" id="about" hidden>
     <div class="about-grid">
-      <article class="about-card fav"><h2 class="kicker">Current favourite</h2><div id="favSlot"></div></article>
+      <div class="about-col">
+        <article class="about-card fav"><h2 class="kicker">Current favourite</h2><div id="favSlot"></div></article>
+        <article class="about-card clip-card" id="clipCard" hidden><h2 class="kicker">The clip</h2><div id="clipSlot"></div></article>
+      </div>
       <article class="about-card bio"><h2 class="kicker">About the artist</h2><div class="facts" id="factsSlot"></div><div id="bioSlot"></div></article>
     </div>
     <article class="about-card timeline-card" id="timelineCard" hidden><h2 class="kicker">The road so far</h2><ol class="timeline" id="timelineSlot"></ol></article>
@@ -743,7 +748,17 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   function renderAbout() {
     const favSlot = document.getElementById('favSlot'), bioSlot = document.getElementById('bioSlot');
     favSlot.replaceChildren(); bioSlot.replaceChildren();
-    if (!genre.about) return;
+    const playing = document.querySelector('#clipSlot video');
+    if (!genre.about) { if (playing) playing.pause(); return; }
+    const clip = aboutData.video, clipSrc = clip && safePath(clip.src);
+    if (clipSrc && !document.querySelector('#clipSlot video')) {
+      const vid = document.createElement('video'); vid.controls = true; vid.playsInline = true; vid.preload = 'metadata'; vid.src = clipSrc;
+      if (safePath(clip.poster)) vid.poster = clip.poster;
+      vid.addEventListener('play', () => audio.pause());
+      audio.addEventListener('play', () => vid.pause());
+      document.getElementById('clipSlot').append(vid);
+    }
+    document.getElementById('clipCard').hidden = !clipSrc;
     const fav = beats.find(b => b.id === String(aboutData.favourite));
     favSlot.append(fav ? card(fav) : el('div', 'soon', 'Coming soon'));
     const bio = typeof aboutData.bio === 'string' ? aboutData.bio.trim() : '';
