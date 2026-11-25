@@ -1,4 +1,6 @@
 [
+  {"id":"nxl","name":"NXL","genre":"trap","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewLength":30},
+  {"id":"wunna-be-great","name":"WUNNA BE GREAT","genre":"trap","audio":"song-wunna-be-great.m4a","cover":"cover-default.jpg","duration":"2:42","previewLength":30},
   {"id":"3-stelle-ebmin-114","name":"3 STELLE","genre":"trap","audio":"clip-3-stelle-ebmin-114.mp3","cover":"cover-default.jpg","duration":"2:02","key":"Ebmin","bpm":114,"clipFrom":0,"previewLength":30,"clip":true},
   {"id":"2706-x3","name":"2706","genre":"chill","audio":"clip-2706-x3.mp3","cover":"cover-default.jpg","duration":"2:00","previewLength":40,"clipFrom":52,"clip":true},
   {"id":"baby-on-baby-v2","name":"BABY ON BABY (ft. vexx)","genre":"collabs","audio":"clip-baby-on-baby-v2.mp3","cover":"cover-default.jpg","duration":"3:02","clipFrom":0,"previewLength":30,"clip":true},
@@ -9,6 +11,9 @@
   {"id":"floating-in-space-oath-x2","name":"FLOATING IN SPACE","genre":"chill","audio":"clip-floating-in-space-oath-x2.mp3","cover":"cover-default.jpg","duration":"1:48","previewLength":45,"clipFrom":0,"clip":true},
   {"id":"hard-shi-2","name":"HARD SHI 2","genre":"hard","audio":"clip-hard-shi-2.mp3","cover":"cover-default.jpg","duration":"1:10","previewLength":40,"clipFrom":0,"clip":true},
   {"id":"high-off-life-x1","name":"HIGH OFF LIFE","genre":"trap","audio":"clip-high-off-life-x1.mp3","cover":"cover-default.jpg","duration":"1:31","clipFrom":0,"previewLength":30,"clip":true},
+  {"id":"blick","name":"BLICK","genre":"used","audio":"song-blick.mp3","cover":"cover-default.jpg","duration":"2:08","previewLength":30},
+  {"id":"fuori-casa","name":"FUORI CASA","genre":"used","audio":"song-fuori-casa.mp3","cover":"cover-default.jpg","duration":"2:05","previewLength":30},
+  {"id":"ta-shooters","name":"TA SHOOTERS","genre":"used","audio":"song-ta-shooters.mp3","cover":"cover-default.jpg","duration":"2:28","previewLength":30},
   {"id":"fallen-angels","name":"FALLEN ANGELS","genre":"used","audio":"song-fallen-angels.mp3","cover":"cover-default.jpg","duration":"2:40","previewLength":40},
   {"id":"i-need-u","name":"I NEED U","genre":"used","audio":"clip-i-need-u.mp3","cover":"cover-default.jpg","duration":"2:15","previewLength":40,"clipFrom":10,"clip":true},
   {"id":"i-was-wrong-gbmin-188","name":"I WAS WRONG","genre":"chill","audio":"clip-i-was-wrong-gbmin-188.mp3","cover":"cover-default.jpg","duration":"2:30","key":"Gbmin","bpm":188,"previewLength":40,"clipFrom":30,"clip":true},
