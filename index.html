@@ -179,6 +179,66 @@ body{background:var(--night);color:var(--fg);font-family:var(--body);font-size:1
   97%,100%{opacity:0}}
 @keyframes sweep{to{transform:translateY(170vh)}}
 @keyframes wallpan{to{background-position:620px 0}}
+
+/* ---- Per-section motion: every room gets its own life, HARD keeps its glitch ---- */
+.fx{position:absolute;pointer-events:none}
+.backdrop .set:not(.on) *{animation-play-state:paused!important}
+
+/* TRAP: LED strips with a light chasing along them, and a purple spectrum breathing at the bottom */
+.fx.led{left:0;right:0;height:8px;background:radial-gradient(circle,var(--led) 0 1.7px,transparent 2.6px) 0 0/15px 8px repeat-x;opacity:.22}
+.fx.led.hot{opacity:.95;filter:drop-shadow(0 0 7px var(--led)) drop-shadow(0 0 16px var(--led));
+  -webkit-mask:linear-gradient(90deg,transparent,#000 50%,transparent) -34vw 0/34vw 100% no-repeat;mask:linear-gradient(90deg,transparent,#000 50%,transparent) -34vw 0/34vw 100% no-repeat;animation:chase 7s linear infinite}
+.fx.led.l2{top:63vh}.fx.led.l1{top:9vh}
+.fx.led.l2.hot{animation-duration:11s;animation-direction:reverse}
+.fx.eq{left:0;right:0;bottom:0;height:46vh;display:flex;align-items:flex-end;gap:5px;padding:0 1.5vw;opacity:.55;-webkit-mask-image:linear-gradient(0deg,#000 10%,transparent);mask-image:linear-gradient(0deg,#000 10%,transparent)}
+.fx.eq span{flex:1;min-width:2px;height:100%;border-radius:3px 3px 0 0;background:linear-gradient(0deg,var(--led),color-mix(in srgb,var(--led) 50%,#fff));transform-origin:bottom;transform:scaleY(.1);animation:eqbar var(--d) ease-in-out infinite alternate}
+@keyframes chase{to{-webkit-mask-position:134vw 0;mask-position:134vw 0}}
+@keyframes eqbar{to{transform:scaleY(var(--h))}}
+
+/* COLLABS: two voices weaving through each other, and two rings that keep meeting */
+.fx.wv{left:0;top:24vh;width:200vw;height:50vh;animation:wavemove var(--d) linear infinite;opacity:.55}
+.fx.wv svg{display:block;width:100%;height:100%;overflow:visible}
+.fx.wv path{fill:none;stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.fx.wv.a path{stroke:var(--led)}.fx.wv.b path{stroke:var(--hot)}.fx.wv.c path{stroke:#fff;stroke-width:1.2}
+.fx.wv.a{filter:drop-shadow(0 0 8px var(--led))}.fx.wv.b{filter:drop-shadow(0 0 8px var(--hot))}.fx.wv.c{opacity:.22}
+.fx.wv.rev{animation-direction:reverse}
+@keyframes wavemove{to{transform:translateX(-50%)}}
+.fx.ring{width:min(46vmin,430px);aspect-ratio:1;border-radius:50%;right:8vw;bottom:12vh;border:1.5px solid var(--led);opacity:.38;box-shadow:0 0 40px color-mix(in srgb,var(--led) 35%,transparent),inset 0 0 40px color-mix(in srgb,var(--led) 20%,transparent);animation:venn 13s ease-in-out infinite}
+.fx.ring.b{border-color:var(--hot);box-shadow:0 0 40px color-mix(in srgb,var(--hot) 35%,transparent),inset 0 0 40px color-mix(in srgb,var(--hot) 20%,transparent);animation-direction:reverse}
+@keyframes venn{0%,100%{transform:translateX(-36%)}50%{transform:translateX(36%)}}
+
+/* SUNG PROJECTS: slow aurora and bokeh lights drifting up like a late-night drive */
+.fx.aurora{left:-10%;right:-10%;top:-18%;height:76vh;background:radial-gradient(40% 60% at 25% 40%,color-mix(in srgb,var(--led) 38%,transparent),transparent 70%),radial-gradient(34% 55% at 72% 30%,color-mix(in srgb,var(--hot) 30%,transparent),transparent 70%);filter:blur(34px);mix-blend-mode:screen;animation:aurora 24s ease-in-out infinite alternate}
+@keyframes aurora{from{transform:translate3d(-4%,0,0) scale(1)}to{transform:translate3d(5%,6%,0) scale(1.12)}}
+.fx.orb{bottom:-24vh;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.7),var(--c) 48%,transparent 72%);filter:blur(1.5px);opacity:0;animation:rise var(--d) linear infinite}
+@keyframes rise{0%{transform:translate3d(0,0,0) scale(.8);opacity:0}14%{opacity:.4}86%{opacity:.4}100%{transform:translate3d(var(--x),-135vh,0) scale(1.25);opacity:0}}
+
+/* CHILL / EXPERIMENTAL: a drifting dot grid and an oscilloscope drawing slow Lissajous knots */
+.fx.dots{inset:0;background:radial-gradient(circle,color-mix(in srgb,var(--led) 60%,transparent) 1px,transparent 1.7px) 0 0/36px 36px;opacity:.2;-webkit-mask-image:radial-gradient(75% 70% at 50% 40%,#000,transparent);mask-image:radial-gradient(75% 70% at 50% 40%,#000,transparent);animation:dots 50s linear infinite}
+@keyframes dots{to{background-position:36px 36px}}
+.fx.scope{left:0;top:0;width:100%;height:100%;opacity:.85;filter:drop-shadow(0 0 6px var(--led))}
+
+/* USED: old film. Grain, dust scratches, a flicker, and a record slowly turning in the corner */
+.fx.grain{inset:-60%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.2;animation:grain .9s steps(1) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-6%,-2%)}80%{transform:translate(5%,4%)}}
+.fx.scratch{top:0;width:1px;height:100vh;background:linear-gradient(180deg,transparent,rgba(255,255,255,.55) 20%,rgba(255,255,255,.35) 70%,transparent);opacity:0;animation:scr var(--d) steps(1) infinite}
+@keyframes scr{0%,88%,100%{opacity:0}90%{opacity:.8}92%{opacity:.1}94%{opacity:.6}96%{opacity:0}}
+.fx.flicker{inset:0;background:#fff;mix-blend-mode:overlay;opacity:0;animation:flick 6.5s steps(1) infinite}
+@keyframes flick{0%,100%{opacity:0}27%{opacity:.05}28%{opacity:0}61%{opacity:.07}62%{opacity:.015}63%{opacity:0}}
+.fx.vinyl{right:-16vmin;bottom:-16vmin;width:72vmin;height:72vmin;border-radius:50%;opacity:.8;
+  background:conic-gradient(from 0deg,transparent 0 38%,rgba(255,255,255,.16) 46%,transparent 54% 88%,rgba(255,255,255,.1) 95%,transparent),repeating-radial-gradient(circle,#101013 0 2px,#2a2a30 3px 4px);
+  box-shadow:0 0 0 2px #2c2c31,0 30px 80px rgba(0,0,0,.6);animation:spin 16s linear infinite}
+.fx.vinyl::after{content:"";position:absolute;inset:36%;border-radius:50%;background:radial-gradient(circle,#09090a 0 7%,var(--led) 8% 100%);opacity:.8}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:700px){.fx.ring{right:-14vmin;bottom:8vh}.fx.wv{top:30vh;height:40vh}.fx.vinyl{right:-28vmin;bottom:-22vmin}}
+/* frosted-glass cards: the section's motion glows through them */
+.grid .beat{background:color-mix(in srgb,var(--panel) 58%,transparent);backdrop-filter:blur(14px) saturate(1.25);-webkit-backdrop-filter:blur(14px) saturate(1.25)}
+.grid .beat .cover{background:linear-gradient(135deg,var(--line),transparent)}
+/* in the animated sections the colour tint sits under the motion, so the motion stays bright */
+.backdrop .tint{display:none}
+:root[data-genre="hard"] .backdrop .tint,:root[data-genre="about"] .backdrop .tint{display:block}
+.backdrop .fxtint{position:absolute;inset:0;background:var(--led);mix-blend-mode:multiply}
+:root:not([data-genre="hard"]):not([data-genre="about"]) .backdrop::after{background:radial-gradient(130% 90% at 50% 0%,transparent 55%,color-mix(in srgb,var(--night) 65%,transparent) 100%)}
 @media (max-width:700px){.hx.fig{width:110vw;right:-38%}.hx.desk{width:100vw;left:-40%}}
 :root[data-genre="rnb"] h1{font-family:"Syne","Arial Black",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}
 h1 .at{opacity:.55;font-weight:inherit;margin-right:.02em;color:var(--fg);text-shadow:none}
@@ -488,6 +548,82 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   const toastEl = document.getElementById('toast');
   const nav = document.getElementById('genres');
   const backdrop = document.getElementById('backdrop');
+  // ---- Per-section background motion (HARD and ABOUT keep their own code above/below) ----
+  const R = (a, b) => a + Math.random() * (b - a);
+  const mk = (cls, parent) => { const d = document.createElement('div'); d.className = cls; parent.append(d); return d; };
+  const smallScreen = innerWidth < 700;
+  const FXLOOPS = {};
+
+  // an oscilloscope that traces two slow Lissajous curves and fades them out as it goes
+  function scopeLoop(canvas) {
+    const ctx = canvas.getContext('2d'); let w = 2, h = 2, t = 0, raf = 0, running = false, curves = [];
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const size = () => { const k = smallScreen ? .5 : .6; w = canvas.width = Math.max(2, Math.floor(innerWidth * k)); h = canvas.height = Math.max(2, Math.floor(innerHeight * k)); };
+    const colour = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#3ccfff';
+    const setup = () => {
+      curves = [
+        { a: 3, b: 2, ax: .36, ay: .30, drift: .021, col: colour('--led'), lw: 2.2 },
+        { a: 5, b: 4, ax: .30, ay: .26, drift: -.017, col: colour('--hot'), lw: 1.6 },
+        { a: 2, b: 3, ax: .42, ay: .22, drift: .013, col: 'rgba(255,255,255,.55)', lw: 1 }
+      ];
+      for (const c of curves) { const p = point(c, 0); c.px = p.x; c.py = p.y; }
+    };
+    const point = (c, tt) => ({ x: w / 2 + w * c.ax * Math.sin(c.a * tt + tt * c.drift * 8), y: h / 2 + h * c.ay * Math.sin(c.b * tt) });
+    const step = () => {
+      for (const c of curves) { const p = point(c, t); ctx.strokeStyle = c.col; ctx.lineWidth = c.lw; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(c.px, c.py); ctx.lineTo(p.x, p.y); ctx.stroke(); c.px = p.x; c.py = p.y; }
+      t += .018;
+    };
+    const frame = () => {
+      if (!running) return;
+      raf = requestAnimationFrame(frame);
+      if (document.hidden) return;
+      ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,.035)'; ctx.fillRect(0, 0, w, h); ctx.globalCompositeOperation = 'source-over';
+      step(); step();
+    };
+    addEventListener('resize', () => { if (running) { size(); setup(); } });
+    return {
+      start() { if (running) return; running = true; size(); setup(); t = 0; if (still) { for (let i = 0; i < 1400; i++) step(); running = false; } else frame(); },
+      stop() { running = false; cancelAnimationFrame(raf); ctx.clearRect(0, 0, w, h); }
+    };
+  }
+
+  const FX = {
+    trap(s) {
+      mk('fx led l1', s); mk('fx led l1 hot', s); mk('fx led l2', s); mk('fx led l2 hot', s);
+      const eq = mk('fx eq', s), n = smallScreen ? 26 : 64;
+      for (let i = 0; i < n; i++) {
+        const b = document.createElement('span'), env = Math.sin(Math.PI * (i + .5) / n);
+        b.style.setProperty('--d', R(.45, 1.5).toFixed(2) + 's'); b.style.setProperty('--h', ((.18 + .82 * env) * R(.45, 1)).toFixed(2));
+        b.style.animationDelay = '-' + R(0, 2).toFixed(2) + 's'; eq.append(b);
+      }
+    },
+    collabs(s) {
+      const W = 2400, H = 400, path = (amp, k, ph) => { let d = ''; for (let x = 0; x <= W; x += 12) d += (x ? 'L' : 'M') + x + ' ' + (H / 2 + amp * Math.sin(2 * Math.PI * k * x / 1200 + ph)).toFixed(1); return d; };
+      for (const v of [{ c: 'a', amp: 95, k: 2, ph: 0, d: 46 }, { c: 'b', amp: 75, k: 3, ph: 1.4, d: 34, rev: 1 }, { c: 'c', amp: 42, k: 5, ph: .6, d: 62 }]) {
+        const w = mk('fx wv ' + v.c + (v.rev ? ' rev' : ''), s); w.style.setProperty('--d', v.d + 's');
+        w.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true"><path d="' + path(v.amp, v.k, v.ph) + '"/></svg>';
+      }
+      mk('fx ring a', s); mk('fx ring b', s);
+    },
+    rnb(s) {
+      mk('fx aurora', s);
+      const n = smallScreen ? 8 : 16;
+      for (let i = 0; i < n; i++) {
+        const o = mk('fx orb', s), z = R(40, 150).toFixed(0);
+        o.style.cssText = 'left:' + R(0, 96).toFixed(1) + '%;width:' + z + 'px;height:' + z + 'px;--d:' + R(26, 60).toFixed(1) + 's;--x:' + R(-12, 12).toFixed(1) + 'vw;--c:var(' + (i % 2 ? '--hot' : '--led') + ');animation-delay:-' + R(0, 50).toFixed(1) + 's';
+      }
+    },
+    chill(s) {
+      mk('fx dots', s);
+      const c = document.createElement('canvas'); c.className = 'fx scope'; s.append(c);
+      FXLOOPS.chill = scopeLoop(c);
+    },
+    used(s) {
+      mk('fx vinyl', s); mk('fx grain', s); mk('fx flicker', s);
+      for (let i = 0; i < 5; i++) { const sc = mk('fx scratch', s); sc.style.left = R(4, 96).toFixed(1) + '%'; sc.style.setProperty('--d', R(5, 11).toFixed(1) + 's'); sc.style.animationDelay = '-' + R(0, 8).toFixed(1) + 's'; }
+    }
+  };
+
   const sets = {};
   for (const g of GENRES) {
     const s = document.createElement('div'); s.className = 'set';
@@ -505,7 +641,10 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
       layer('ax glow g1'); layer('ax glow g2');
       text('ax word w1', 'TARANTO'); text('ax word w2', 'MADRID');
       text('ax coords', 'Taranto 40.47°N 17.24°E — Madrid 40.42°N 3.70°W');
-    } else for (const src of g.photos) layer('ph', src);
+    } else {
+      for (const src of g.photos) layer('ph', src);
+      if (FX[g.id]) { mk('fxtint', s); FX[g.id](s); }
+    }
     backdrop.append(s); sets[g.id] = s;
   }
   const tint = document.createElement('div'); tint.className = 'tint'; backdrop.append(tint);
@@ -556,6 +695,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   }
 
   function renderPhotos() {
+    for (const id in FXLOOPS) FXLOOPS[id][id === genre.id ? 'start' : 'stop']();
     for (const id in sets) sets[id].classList.toggle('on', id === genre.id);
   }
 
