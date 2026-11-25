@@ -730,7 +730,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
       if (g.about) continue;
       const c = inGenre(g).length;
       const d = el('a', 'door'); d.href = '#' + g.id; d.style.setProperty('--c', g.color);
-      d.append(el('b', '', g.label), el('small', '', c + (c === 1 ? ' beat' : ' beats')));
+      d.append(el('b', '', g.label), el('small', '', c + ' ' + (g.id === 'rnb' ? (c === 1 ? 'song' : 'songs') : (c === 1 ? 'beat' : 'beats'))));
       doors.append(d);
     }
     if (genre.about) {
@@ -738,7 +738,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
       const b = el('div'); b.append(document.createTextNode((GENRES.length - 1) + ' '), el('span', '', 'sounds'));
       stats.append(a, b); return;
     }
-    const n = el('div'); n.append(document.createTextNode(list.length + ' '), el('span', '', (list.length === 1 ? 'beat' : 'beats') + ' in ' + genre.label));
+    const n = el('div'); n.append(document.createTextNode(list.length + ' '), el('span', '', (genre.id === 'rnb' ? (list.length === 1 ? 'song' : 'songs') : (list.length === 1 ? 'beat' : 'beats')) + ' in ' + genre.label));
     stats.append(n);
     const all = el('div'); all.append(document.createTextNode(beats.length + ' '), el('span', '', 'total'));
     stats.append(all);
