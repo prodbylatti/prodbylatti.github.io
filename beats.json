@@ -9,6 +9,7 @@
   {"id":"floating-in-space-oath-x2","name":"FLOATING IN SPACE","genre":"chill","audio":"clip-floating-in-space-oath-x2.mp3","cover":"cover-default.jpg","duration":"1:48","previewLength":45,"clipFrom":0,"clip":true},
   {"id":"hard-shi-2","name":"HARD SHI 2","genre":"hard","audio":"clip-hard-shi-2.mp3","cover":"cover-default.jpg","duration":"1:10","previewLength":40,"clipFrom":0,"clip":true},
   {"id":"high-off-life-x1","name":"HIGH OFF LIFE","genre":"trap","audio":"clip-high-off-life-x1.mp3","cover":"cover-default.jpg","duration":"1:31","clipFrom":0,"previewLength":30,"clip":true},
+  {"id":"fallen-angels","name":"FALLEN ANGELS","genre":"used","audio":"song-fallen-angels.mp3","cover":"cover-default.jpg","duration":"2:40","previewLength":40},
   {"id":"i-need-u","name":"I NEED U","genre":"used","audio":"clip-i-need-u.mp3","cover":"cover-default.jpg","duration":"2:15","previewLength":40,"clipFrom":10,"clip":true},
   {"id":"i-was-wrong-gbmin-188","name":"I WAS WRONG","genre":"chill","audio":"clip-i-was-wrong-gbmin-188.mp3","cover":"cover-default.jpg","duration":"2:30","key":"Gbmin","bpm":188,"previewLength":40,"clipFrom":30,"clip":true},
   {"id":"keyboard-x2","name":"KEYBOARD (ft. vexx)","genre":"collabs","audio":"clip-keyboard-x2.mp3","cover":"cover-default.jpg","duration":"2:27","clipFrom":0,"previewLength":30,"clip":true},
