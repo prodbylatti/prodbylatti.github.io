@@ -148,7 +148,11 @@ body{background:var(--night);color:var(--fg);font-family:var(--body);font-size:1
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 8%,color-mix(in srgb,var(--night) 70%,transparent) 45%,color-mix(in srgb,var(--night) 10%,transparent) 100%)}
 :root[data-genre="collabs"] .hero-img,:root[data-genre="chill"] .hero-img,:root[data-genre="used"] .hero-img{filter:var(--hero-filter)}
 :root[data-genre="chill"] h1{font-family:"Syne","Arial Black",system-ui,sans-serif;font-weight:800;letter-spacing:0}
-:root[data-genre="used"] .beat .cover img{filter:grayscale(1) brightness(.85)}
+:root[data-genre="used"] .beat .cover img[src*="default"]{filter:grayscale(1) brightness(.85)}
+.dl.spotify{border-color:color-mix(in srgb,#1ed760 45%,var(--line))}
+.dl.spotify:hover{border-color:#1ed760;background:color-mix(in srgb,#1ed760 14%,transparent)}
+.dl.spotify svg{width:17px;height:17px}
+.used-tag.unreleased{color:var(--fg);border-style:solid;letter-spacing:.2em}
 .used-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-align:center;border:1px dashed var(--line);border-radius:calc(var(--radius) * .65);padding:9px 12px}
 :root[data-genre="rnb"] .hero-img{filter:saturate(1.05) brightness(1.55) contrast(1.05)}
 :root[data-genre="rnb"] .hero::after{background:linear-gradient(90deg,color-mix(in srgb,var(--night) 85%,transparent) 0%,color-mix(in srgb,var(--night) 35%,transparent) 40%,transparent 65%)}
@@ -525,6 +529,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     return { st, len: isFinite(d) ? Math.min(L, d - st) : L };
   };
 
+  const SPOTIFY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1ed760"/><path d="M6.5 9.3c3.7-1.1 8-.8 11.2 1.1M7.2 12.4c3.1-.9 6.6-.6 9.3 1M7.9 15.3c2.5-.7 5.1-.5 7.3.8" stroke="#000" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';
   const ICON = {
     play:'<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>',
     pause:'<svg viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>',
@@ -695,7 +700,12 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     meta.append(seek);
 
     if (isLocked(b)) {
-      meta.append(el('div', 'used-tag', b.genre === 'used' ? 'Used · not for download' : 'Listen only · not for download'));
+      const sp = typeof b.spotify === 'string' && /^https:\/\/open\.spotify\.com\/track\/[A-Za-z0-9]+$/.test(b.spotify) ? b.spotify : '';
+      if (sp) {
+        const a = el('a', 'dl spotify'); a.href = sp; a.target = '_blank'; a.rel = 'noopener';
+        a.innerHTML = SPOTIFY_ICON; a.append(document.createTextNode('Listen on Spotify')); meta.append(a);
+      } else if (b.unreleased) meta.append(el('div', 'used-tag unreleased', 'Unreleased'));
+      else meta.append(el('div', 'used-tag', b.genre === 'used' ? 'Used · not for download' : 'Listen only · not for download'));
       art.append(cov, meta);
       return art;
     }
