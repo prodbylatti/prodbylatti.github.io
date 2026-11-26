@@ -6,6 +6,7 @@
 <title>prodbylatti | Beat producer from Taranto, based in Madrid</title>
 <meta name="description" content="prodbylatti: beat producer from Taranto, Italy, based in Madrid. Listen to trap, hard, chill and R&amp;B beats, collabs and sung projects, and request beats by email.">
 <link rel="canonical" href="https://prodbylatti.github.io/">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="4899a8dc-d762-43e8-9a35-de533f1de077" data-domains="prodbylatti.github.io"></script>
 <meta name="theme-color" content="#09090a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="@prodbylatti beats">
@@ -521,7 +522,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
 <p>To request a beat, email prod.lattigoincrxzy [at] gmail.com with your name and the beat.</p>
 </div></noscript>
 
-<footer><div class="wrap">© @prodbylatti · Beats are for listening and approved use only</div></footer>
+<footer><div class="wrap">© @prodbylatti · Beats are for listening and approved use only<br>Visits and plays are counted with Umami, without cookies or personal data.</div></footer>
 <div class="modal" id="reqModal" hidden role="dialog" aria-modal="true" aria-labelledby="reqTitle">
   <div class="sheet">
     <button class="x" type="button" data-close aria-label="Close">×</button>
@@ -591,6 +592,10 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   // phones and tablets get a lighter HARD: no stacked filters, blend modes or glitch clones (they crash iPhone Safari)
   const lite = innerWidth < 821 || matchMedia('(hover: none)').matches;
   if (lite) document.documentElement.classList.add('lite');
+  // visit and play counting (Umami, no cookies, no personal data); does nothing if the script is blocked
+  const track = (name, data) => { try { if (window.umami) window.umami.track(name, data); } catch {} };
+  const sectionName = id => (GENRES.find(g => g.id === id) || {}).label || id;
+  let lastSection = '', clipTracked = false;
   const FXLOOPS = {};
 
   // an oscilloscope that traces two slow Lissajous curves and fades them out as it goes
@@ -782,7 +787,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     if (clipSrc && !document.querySelector('#clipSlot video')) {
       const vid = document.createElement('video'); vid.controls = true; vid.playsInline = true; vid.preload = 'metadata'; vid.src = clipSrc;
       if (safePath(clip.poster)) vid.poster = clip.poster;
-      vid.addEventListener('play', () => audio.pause());
+      vid.addEventListener('play', () => { audio.pause(); if (!clipTracked) { clipTracked = true; track('clip-play'); } });
       audio.addEventListener('play', () => vid.pause());
       document.getElementById('clipSlot').append(vid);
     }
@@ -833,6 +838,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
 
   function setGenre(id) {
     genre = GENRES.find(g => g.id === id) || GENRES[0];
+    if (genre.id !== lastSection) { lastSection = genre.id; track('section', { name: genre.label }); }
     root.dataset.genre = genre.id;
     document.getElementById('about').hidden = !genre.about;
     document.getElementById('bar').hidden = !!genre.about;
@@ -929,6 +935,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     if (current === b.id) { audio.paused ? audio.play().catch(() => toast('Playback was blocked. Tap play again.')) : audio.pause(); return; }
     if (current) { setUI(current, false); resetSeek(current); }
     current = b.id; curBeat = b; audio.src = src;
+    track('play', { beat: b.name, section: sectionName(b.genre) });
     audio.addEventListener('loadedmetadata', () => { audio.currentTime = win().st; }, { once: true });
     audio.play().catch(() => toast('Could not play this beat.'));
   }
@@ -1040,6 +1047,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   }
   function openRequest(b) {
     reqBeat = b;
+    track('request', { beat: b.name, section: sectionName(b.genre) });
     $id('reqTitle').textContent = 'Request “' + b.name + '”';
     const what = b.genre === 'rnb' ? 'song' : 'beat';
     $id('reqIntro').textContent = (what === 'song' ? 'Songs' : 'Beats') + ' aren’t downloaded from this site. Email me your name and the ' + what + ' you want, and I’ll take it from there.';
@@ -1047,8 +1055,10 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   }
   $id('reqName').addEventListener('input', syncRequest);
   $id('reqForm').addEventListener('submit', e => { e.preventDefault(); if ($id('reqGmail').href) $id('reqGmail').click(); });
+  $id('reqGmail').addEventListener('click', () => { if ($id('reqGmail').getAttribute('aria-disabled') !== 'true') track('request-sent', { beat: reqBeat ? reqBeat.name : '', via: 'gmail' }); });
   $id('reqSend').addEventListener('click', () => {
     if ($id('reqSend').getAttribute('aria-disabled') === 'true') return;
+    track('request-sent', { beat: reqBeat ? reqBeat.name : '', via: 'mail app' });
     toast('If nothing opens, copy the message below.');
   });
 
@@ -1103,6 +1113,11 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     setGenre(h);
   }
 
+  document.addEventListener('click', e => {
+    const a = e.target.closest ? e.target.closest('a.dl.spotify, a.artist-card') : null; if (!a) return;
+    if (a.classList.contains('spotify')) { const n = a.closest('.beat'); track('spotify-click', { beat: n && n.querySelector('.name') ? n.querySelector('.name').textContent : '' }); }
+    else { const b = a.querySelector('b'); track('artist-click', { artist: b ? b.textContent : '' }); }
+  });
   q.addEventListener('input', render);
   window.addEventListener('hashchange', fromHash);
   fromHash();
