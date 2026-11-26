@@ -449,6 +449,29 @@ h1 span{color:var(--led);text-shadow:0 0 28px color-mix(in srgb,var(--led) 60%,t
 .owner-actions.decide{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .owner-actions.decide .dl{padding:13px 12px;font-size:15px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--night);font-weight:600;padding:10px 16px;border-radius:10px;max-width:calc(100% - 32px);font-size:14px;z-index:5}
+
+/* mini player */
+.mp{position:fixed;left:0;right:0;bottom:0;z-index:6;background:color-mix(in srgb,var(--panel) 94%,#000);border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(0,0,0,.4);padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));transform:translateY(110%);transition:transform .3s ease;visibility:hidden}
+.mp.on{transform:none;visibility:visible}
+.mp-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px}
+.mp img{width:46px;height:46px;border-radius:calc(var(--radius) / 2.5);object-fit:cover;display:block;background:var(--line)}
+.mp-meta{min-width:0}
+.mp-name{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-sec{font-family:var(--mono);font-size:11px;color:var(--dim);white-space:nowrap}
+.mp-bar{display:flex;align-items:center;gap:8px;margin-top:5px;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.mp-track{flex:1;height:18px;display:flex;align-items:center;cursor:pointer;touch-action:none}
+.mp-track::before{content:"";display:block;width:100%;height:4px;border-radius:4px;background:var(--line)}
+.mp-track{position:relative}
+.mp-track i{position:absolute;left:0;top:7px;height:4px;width:0;border-radius:4px;background:var(--led);pointer-events:none}
+.mp-ctl{display:flex;align-items:center;gap:6px}
+.mp-ctl button{width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer}
+.mp-ctl button svg{width:20px;height:20px;fill:currentColor}
+.mp-ctl .mp-play{width:44px;height:44px;background:var(--fg);color:var(--night)}
+.mp-ctl .mp-play svg{width:22px;height:22px}
+.mp-ctl button:focus-visible{outline:2px solid var(--led);outline-offset:2px}
+body.mp-on footer{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+body.mp-on .toast{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+@media (max-width:520px){.mp-cur,.mp-dur{display:none}.mp img{width:40px;height:40px}}
 footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font-family:var(--mono);font-size:12px}
 .beat{background:color-mix(in srgb,var(--panel) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -522,6 +545,12 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
 <p>To request a beat, email prod.lattigoincrxzy [at] gmail.com with your name and the beat.</p>
 </div></noscript>
 
+<div class="mp" id="mp" aria-label="Mini player"><div class="mp-in">
+  <img id="mpImg" alt="" width="46" height="46">
+  <div class="mp-meta"><div class="mp-name" id="mpName"></div><div class="mp-sec" id="mpSec"></div>
+    <div class="mp-bar"><span class="mp-cur" id="mpCur">0:00</span><div class="mp-track" id="mpTrack" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="mpFill"></i></div><span class="mp-dur" id="mpDur">0:00</span></div></div>
+  <div class="mp-ctl"><button type="button" id="mpPrev" aria-label="Previous beat"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button><button type="button" class="mp-play" id="mpPlay" aria-label="Play"></button><button type="button" id="mpNext" aria-label="Next beat"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button></div>
+</div></div>
 <footer><div class="wrap">© @prodbylatti · Beats are for listening and approved use only<br>Visits and plays are counted with Umami, without cookies or personal data.</div></footer>
 <div class="modal" id="reqModal" hidden role="dialog" aria-modal="true" aria-labelledby="reqTitle">
   <div class="sheet">
@@ -961,6 +990,42 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     c.querySelector('.track i').style.width = pct + '%';
     c.querySelector('.track').setAttribute('aria-valuenow', Math.round(pct));
     c.querySelector('.cur').textContent = fmt(Math.max(0, rel));
+  });
+
+
+  // ---- mini player: a bottom bar that mirrors whatever is playing and steps through the same section ----
+  const mp = document.getElementById('mp'), mpImg = document.getElementById('mpImg'), mpName = document.getElementById('mpName'), mpSec = document.getElementById('mpSec'),
+    mpCur = document.getElementById('mpCur'), mpDur = document.getElementById('mpDur'), mpFill = document.getElementById('mpFill'), mpTrack = document.getElementById('mpTrack'), mpPlay = document.getElementById('mpPlay');
+  const playable = () => curBeat ? beats.filter(x => x.genre === curBeat.genre && safePath(x.audio)) : [];
+  function mpMeta() {
+    if (!curBeat) return;
+    mp.classList.add('on'); document.body.classList.add('mp-on');
+    mpName.textContent = curBeat.name; mpSec.textContent = sectionName(curBeat.genre);
+    const cv = safePath(curBeat.cover); if (cv && mpImg.getAttribute('src') !== cv) mpImg.src = cv;
+    mpDur.textContent = fmt(win().len);
+  }
+  function mpState() { const pl = !audio.paused; mpPlay.innerHTML = pl ? ICON.pause : ICON.play; mpPlay.setAttribute('aria-label', pl ? 'Pause' : 'Play'); }
+  function mpStep(d) {
+    const l = playable(); if (!l.length) return; const i = l.findIndex(x => x.id === curBeat.id);
+    const n = l[(i + d + l.length) % l.length]; if (n) { track('mini-' + (d > 0 ? 'next' : 'prev'), { beat: n.name }); toggle(n); }
+  }
+  mpPlay.addEventListener('click', () => { if (!curBeat) return; track('mini-toggle'); toggle(curBeat); });
+  document.getElementById('mpPrev').addEventListener('click', () => mpStep(-1));
+  document.getElementById('mpNext').addEventListener('click', () => mpStep(1));
+  const mpSeek = e => { if (!curBeat) return; const r = mpTrack.getBoundingClientRect(); seekTo(curBeat, (e.clientX - r.left) / r.width); };
+  let mpDrag = false;
+  mpTrack.addEventListener('pointerdown', e => { mpDrag = true; try { mpTrack.setPointerCapture(e.pointerId); } catch {} mpSeek(e); });
+  mpTrack.addEventListener('pointermove', e => { if (mpDrag) mpSeek(e); });
+  mpTrack.addEventListener('pointerup', () => { mpDrag = false; });
+  mpTrack.addEventListener('pointercancel', () => { mpDrag = false; });
+  mpTrack.addEventListener('keydown', e => { if (!curBeat || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return; const { st, len } = win(); audio.currentTime = Math.min(st + len - 0.25, Math.max(st, audio.currentTime + (e.key === 'ArrowRight' ? 5 : -5))); e.preventDefault(); });
+  audio.addEventListener('play', () => { mpMeta(); mpState(); });
+  audio.addEventListener('pause', mpState);
+  audio.addEventListener('loadedmetadata', mpMeta);
+  audio.addEventListener('timeupdate', () => {
+    if (!curBeat) return; const { st, len } = win(); if (!isFinite(len)) return;
+    const rel = Math.min(len, Math.max(0, audio.currentTime - st)), pct = rel / len * 100;
+    mpFill.style.width = pct + '%'; mpTrack.setAttribute('aria-valuenow', Math.round(pct)); mpCur.textContent = fmt(rel);
   });
 
   // The viewer's download bridge arrives after the page's first run, so ask for it when it's needed.
