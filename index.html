@@ -461,9 +461,9 @@ h1 span{color:var(--led);text-shadow:0 0 28px color-mix(in srgb,var(--led) 60%,t
 .mp-bar{display:flex;align-items:center;gap:8px;margin-top:5px;font-family:var(--mono);font-size:11px;color:var(--dim)}
 .mp-track{flex:1;height:6px;border-radius:3px;background:var(--line);position:relative;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .mp-track::before{content:"";position:absolute;inset:-14px 0}
-.mp-track i{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:linear-gradient(90deg,var(--led),var(--hot));pointer-events:none}
-.mp-track i::after{content:"";position:absolute;right:-8px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--fg);box-shadow:0 0 0 3px color-mix(in srgb,var(--led) 45%,transparent),0 0 14px color-mix(in srgb,var(--led) 70%,transparent);transition:transform .15s}
-.mp-track.drag{cursor:grabbing}.mp-track.drag i::after{transform:scale(1.25)}
+.mp-track i{overflow:visible;position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:linear-gradient(90deg,var(--led),var(--hot));pointer-events:none}
+.mp-track i b{display:block;position:absolute;z-index:2;pointer-events:none;right:-8px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--fg);box-shadow:0 0 0 3px color-mix(in srgb,var(--led) 45%,transparent),0 0 14px color-mix(in srgb,var(--led) 70%,transparent);transition:transform .15s}
+.mp-track.drag{cursor:grabbing}.mp-track.drag i b{transform:scale(1.25)}
 .mp-track:focus-visible{outline:2px solid var(--led);outline-offset:6px}
 .mp-bar{padding-right:8px}
 .mp-ctl{display:flex;align-items:center;gap:6px}
@@ -551,7 +551,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
 <div class="mp" id="mp" aria-label="Mini player"><div class="mp-in">
   <img id="mpImg" alt="" width="46" height="46">
   <div class="mp-meta"><div class="mp-name" id="mpName"></div><div class="mp-sec" id="mpSec"></div>
-    <div class="mp-bar"><span class="mp-cur" id="mpCur">0:00</span><div class="mp-track" id="mpTrack" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="mpFill"></i></div><span class="mp-dur" id="mpDur">0:00</span></div></div>
+    <div class="mp-bar"><span class="mp-cur" id="mpCur">0:00</span><div class="mp-track" id="mpTrack" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="mpFill"><b></b></i></div><span class="mp-dur" id="mpDur">0:00</span></div></div>
   <div class="mp-ctl"><button type="button" id="mpPrev" aria-label="Previous beat"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button><button type="button" class="mp-play" id="mpPlay" aria-label="Play"></button><button type="button" id="mpNext" aria-label="Next beat"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button></div>
 </div></div>
 <footer><div class="wrap">© @prodbylatti · Beats are for listening and approved use only<br>Visits and plays are counted with Umami, without cookies or personal data.</div></footer>
