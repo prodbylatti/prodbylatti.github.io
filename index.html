@@ -1196,6 +1196,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     if (a.classList.contains('spotify')) { const n = a.closest('.beat'); track('spotify-click', { beat: n && n.querySelector('.name') ? n.querySelector('.name').textContent : '' }); }
     else { const b = a.querySelector('b'); track('artist-click', { artist: b ? b.textContent : '' }); }
   });
+  document.addEventListener('click', e => { const a = e.target.closest ? e.target.closest('a[href*="open.spotify.com"]') : null; if (a) { a.target = '_blank'; a.rel = 'noopener'; } }, true);
   q.addEventListener('input', render);
   window.addEventListener('hashchange', fromHash);
   fromHash();
