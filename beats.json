@@ -24,7 +24,7 @@
   {"id":"mixed-ways-v3-latti","name":"MIXED WAYS (FT. VEXX)","genre":"collabs","audio":"clip-mixed-ways-v3-latti.mp3","cover":"cover-default.jpg","duration":"2:46","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"keyboard-x2","name":"KEYBOARD (FT. VEXX)","genre":"collabs","audio":"clip-keyboard-x2.mp3","cover":"cover-default.jpg","duration":"2:27","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"baby-on-baby-v2","name":"BABY ON BABY (FT. VEXX)","genre":"collabs","audio":"clip-baby-on-baby-v2.mp3","cover":"cover-default.jpg","duration":"3:02","clipFrom":0,"previewLength":30,"clip":true},
-  {"id":"nxl","name":"NXL (FT. NEIMLESS)","genre":"collabs","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewLength":30},
+  {"id":"nxl","name":"NXL (FT. NEIMLESS)","genre":"collabs","audio":"song-nxl.mp3","cover":"cover-default.jpg","duration":"2:18","previewStart":8,"previewLength":30},
   {"id":"scantinato-x2","name":"SCANTINATO","genre":"hard","audio":"clip-scantinato-x2.mp3","cover":"cover-default.jpg","duration":"1:39","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"scheming-switch-x1","name":"SCHEMING SWITCH","genre":"hard","audio":"clip-scheming-switch-x1.mp3","cover":"cover-default.jpg","duration":"2:13","previewLength":50,"clipFrom":47,"clip":true},
   {"id":"von-x2","name":"VON","genre":"hard","audio":"clip-von-x2.mp3","cover":"cover-default.jpg","duration":"1:43","previewLength":40,"clipFrom":0,"clip":true},
