@@ -9,7 +9,7 @@
   {"id":"high-off-life-x1","name":"HIGH OFF LIFE","genre":"trap","audio":"clip-high-off-life-x1.mp3","cover":"cover-default.jpg","duration":"1:31","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"big-brr-x2","name":"BIG BRR","genre":"trap","audio":"clip-big-brr-x2.mp3","cover":"cover-default.jpg","duration":"3:16","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"3-stelle-ebmin-114","name":"3 STELLE","genre":"trap","audio":"clip-3-stelle-ebmin-114.mp3","cover":"cover-default.jpg","duration":"2:02","clipFrom":0,"previewLength":30,"clip":true},
-  {"id":"wunna-be-great","name":"WUNNA BE GREAT","genre":"trap","audio":"song-wunna-be-great.m4a","cover":"cover-default.jpg","duration":"2:42","previewLength":30},
+  {"id":"wunna-be-great","name":"WUNNA BE GREAT","genre":"trap","audio":"song-wunna-be-great.m4a","cover":"cover-default.jpg","duration":"2:42","previewStart":14,"previewLength":30},
   {"id":"floating-in-space-oath-x2","name":"FLOATING IN SPACE","genre":"chill","audio":"clip-floating-in-space-oath-x2.mp3","cover":"cover-default.jpg","duration":"1:48","previewLength":45,"clipFrom":0,"clip":true},
   {"id":"thaughts","name":"THOUGHTS","genre":"chill","audio":"song-thaughts.mp3","cover":"cover-default.jpg","duration":"1:24","fullPreview":true},
   {"id":"i-was-wrong-gbmin-188","name":"I WAS WRONG","genre":"chill","audio":"clip-i-was-wrong-gbmin-188.mp3","cover":"cover-default.jpg","duration":"2:30","previewLength":40,"clipFrom":30,"clip":true},
