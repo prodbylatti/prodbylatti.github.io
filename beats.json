@@ -37,6 +37,5 @@
   {"id":"rimpianto","name":"RIMPIANTO","genre":"used","audio":"clip-rimpianto.mp3","cover":"cover-default.jpg","duration":"1:45","previewLength":40,"clipFrom":14,"clip":true,"unreleased":true,"artist":"GOSHA"},
   {"id":"ta-shooters","name":"TA SHOOTERS (FT. VEXX & FOX)","genre":"used","audio":"song-ta-shooters.mp3","cover":"cover-default.jpg","duration":"2:28","previewLength":30,"unreleased":true,"artist":"MERCURY & OASY"},
   {"id":"karma","name":"KARMA","genre":"rnb","audio":"song-karma.mp3","cover":"cover-karma.jpg","duration":"3:08"},
-  {"id":"nobody-gets-me","name":"NOBODY GETS ME","genre":"rnb","audio":"song-nobody-gets-me.mp3","cover":"cover-nobody-gets-me.jpg","duration":"2:59"},
-  {"id":"stupido-pensiero","name":"STUPIDO PENSIERO","genre":"rnb","audio":"song-stupido-pensiero.mp3","cover":"cover-stupido-pensiero.jpg","duration":"3:48"}
+  {"id":"nobody-gets-me","name":"NOBODY GETS ME","genre":"rnb","audio":"song-nobody-gets-me.mp3","cover":"cover-nobody-gets-me.jpg","duration":"2:59"}
 ]
