@@ -253,6 +253,11 @@ body{background:var(--night);color:var(--fg);font-family:var(--body);font-size:1
 .lite .backdrop .tint{display:none!important}
 :root.lite[data-genre="hard"] .hero::before{display:none}
 .lite .grid .beat,.lite .about-card{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+/* phones / in-app browsers: switch sections instantly and drop the effects that tear while the page changes */
+.lite .backdrop .set,.lite .backdrop .set.on{transition:none}
+.lite body{transition:none}
+.lite .backdrop .fxtint{mix-blend-mode:normal;opacity:.22}
+.lite .grid .beat,.lite .about-card{backdrop-filter:none;-webkit-backdrop-filter:none;background:color-mix(in srgb,var(--panel) 84%,transparent)}
 @keyframes jitter{0%,88%,100%{transform:translateX(0)}90%{transform:translateX(-14px)}93%{transform:translateX(12px)}96%{transform:translateX(-6px)}}
 @media (max-width:700px){:root[data-genre="hard"] h1{font-size:clamp(26px,7.2vw,60px)}:root[data-genre="rnb"] h1,:root[data-genre="chill"] h1{font-size:clamp(26px,8.2vw,60px)}}
 /* let the header melt into the page instead of ending on a hard line */
