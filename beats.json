@@ -26,7 +26,7 @@
   {"id":"thugger-109-ebmin","name":"THUGGER","genre":"hard","audio":"clip-thugger-109-ebmin.mp3","cover":"cover-default.jpg","duration":"2:03","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"sentenza-x2-1","name":"SENTENZA","genre":"hard","audio":"clip-sentenza-x2-1.mp3","cover":"cover-default.jpg","duration":"1:38","clipFrom":0,"previewLength":30,"clip":true},
   {"id":"scantinato-x2","name":"SCANTINATO","genre":"hard","audio":"clip-scantinato-x2.mp3","cover":"cover-default.jpg","duration":"1:39","clipFrom":0,"previewLength":30,"clip":true},
-  {"id":"scheming-switch-x1","name":"SCHEMING SWITCH","genre":"hard","audio":"clip-scheming-switch-x1.mp3","cover":"cover-default.jpg","duration":"2:13","previewLength":50,"clipFrom":47,"clip":true},
+  {"id":"scheming-switch-x1","name":"SCHEMING (SWITCH)","genre":"hard","audio":"clip-scheming-switch-x1.mp3","cover":"cover-default.jpg","duration":"2:13","previewLength":50,"clipFrom":47,"clip":true},
   {"id":"von-x2","name":"VON","genre":"hard","audio":"clip-von-x2.mp3","cover":"cover-default.jpg","duration":"1:43","previewLength":40,"clipFrom":0,"clip":true},
   {"id":"hard-shi-2","name":"HARD SHI 2","genre":"hard","audio":"clip-hard-shi-2.mp3","cover":"cover-default.jpg","duration":"1:10","previewLength":40,"clipFrom":0,"clip":true},
   {"id":"plugged","name":"SENZA RITORNO (FT. 1SENTENZA & FOX)","genre":"used","audio":"clip-plugged.mp3","cover":"cover-plugged.jpg","duration":"1:57","previewLength":40,"clipFrom":0,"clip":true,"spotify":"https://open.spotify.com/track/5BnKVyDChpBfgaiWYIMJyt","artist":"TICO"},
