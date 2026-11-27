@@ -631,7 +631,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
     about: { label: 'CHI SONO', lede: 'Producer di Taranto, ora a Madrid. Scegli un sound qui sotto e ascolta.' },
     trap: { label: 'TRAP', blurb: 'Trap notturna, cucinata sotto la luce viola.' },
     collabs: { label: 'COLLAB', blurb: 'Fatti insieme ad altri producer.', lede: 'Collab cucinate con altri producer. Premi play per un’anteprima e scrivimi per quelli che vuoi.' },
-    rnb: { label: 'CANZONI', blurb: 'Progetti cantati con gli artisti con cui ho lavorato.', lede: 'Progetti cantati dalla stanza blu. Ascoltali per intero e scrivimi per quelli che vuoi.' },
+    rnb: { label: 'COVER DI CANZONI FAMOSE', blurb: 'Progetti cantati con gli artisti con cui ho lavorato.', lede: 'Progetti cantati dalla stanza blu. Ascoltali per intero e scrivimi per quelli che vuoi.' },
     chill: { label: 'CHILL / SPERIMENTALE', blurb: 'Quelli più lenti, strani e morbidi.', lede: 'Il lato chill e sperimentale. Premi play per un’anteprima e scrivimi per quelli che vuoi.' },
     hard: { label: 'HARD', blurb: 'Quelli aggressivi. Solo luce rossa.' },
     used: { label: 'USATI', blurb: 'Già presi. Solo per l’ascolto.', lede: 'Beat che hanno già trovato il loro artista. Puoi sentirli qui, ma non sono disponibili al download.' }
@@ -639,7 +639,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   const gl = g => (LANG === 'it' && IT_GENRE[g.id] && IT_GENRE[g.id].label) || g.label;
   const gb = g => (LANG === 'it' && IT_GENRE[g.id] && IT_GENRE[g.id].blurb) || g.blurb;
   const gld = g => (LANG === 'it' && IT_GENRE[g.id] && IT_GENRE[g.id].lede) || g.lede || T('New beats straight from the studio. Hit play for a preview, and email me for the ones you want.', 'Beat nuovi direttamente dallo studio. Premi play per un’anteprima e scrivimi per quelli che vuoi.');
-  const unit = (n, song) => song ? (LANG === 'it' ? (n === 1 ? 'canzone' : 'canzoni') : (n === 1 ? 'song' : 'songs')) : 'beat' + (LANG === 'it' || n === 1 ? '' : 's');
+  const unit = (n, song) => song ? (LANG === 'it' ? 'cover' : (n === 1 ? 'song' : 'songs')) : 'beat' + (LANG === 'it' || n === 1 ? '' : 's');
   function applyStatic() {
     root.lang = LANG;
     for (const e of document.querySelectorAll('[data-it]')) { if (e.dataset.en == null) e.dataset.en = e.textContent; e.textContent = LANG === 'it' ? e.dataset.it : e.dataset.en; }
@@ -975,7 +975,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
       return art;
     }
     if (isGated(b)) {
-      const rq = el('button', 'dl'); rq.type = 'button'; rq.innerHTML = ICON.dl; rq.append(document.createTextNode(b.genre === 'rnb' ? T('Request this song', 'Richiedi questa canzone') : T('Request this beat', 'Richiedi questo beat')));
+      const rq = el('button', 'dl'); rq.type = 'button'; rq.innerHTML = ICON.dl; rq.append(document.createTextNode(b.genre === 'rnb' ? T('Request this song', 'Richiedi questa cover') : T('Request this beat', 'Richiedi questo beat')));
       rq.addEventListener('click', () => openRequest(b, rq));
       meta.append(rq); art.append(cov, meta); return art;
     }
@@ -1162,7 +1162,7 @@ footer{border-top:1px solid var(--line);padding-block:22px;color:var(--dim);font
   function openRequestText(b) {
     $id('reqTitle').textContent = T('Request “' + b.name + '”', 'Richiedi “' + b.name + '”');
     const what = b.genre === 'rnb' ? 'song' : 'beat';
-    $id('reqIntro').textContent = T((what === 'song' ? 'Songs' : 'Beats') + ' aren’t downloaded from this site. Email me your name and the ' + what + ' you want, and I’ll take it from there.', (what === 'song' ? 'Le canzoni non si scaricano' : 'I beat non si scaricano') + ' da questo sito. Scrivimi il tuo nome e ' + (what === 'song' ? 'la canzone' : 'il beat') + ' che vuoi, e ci penso io.');
+    $id('reqIntro').textContent = T((what === 'song' ? 'Songs' : 'Beats') + ' aren’t downloaded from this site. Email me your name and the ' + what + ' you want, and I’ll take it from there.', (what === 'song' ? 'Le cover non si scaricano' : 'I beat non si scaricano') + ' da questo sito. Scrivimi il tuo nome e ' + (what === 'song' ? 'la cover' : 'il beat') + ' che vuoi, e ci penso io.');
   }
   $id('reqName').addEventListener('input', syncRequest);
   $id('reqForm').addEventListener('submit', e => { e.preventDefault(); if ($id('reqGmail').href) $id('reqGmail').click(); });
