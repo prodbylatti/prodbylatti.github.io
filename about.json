@@ -33,6 +33,11 @@
   "timeline": [],
   "artists": [
     {
+      "name": "PITFALL",
+      "spotify": "https://open.spotify.com/artist/5cpt7T1hSpKCphzEysTDPK",
+      "photo": "artist-pitfall.jpg"
+    },
+    {
       "name": "MERCURY",
       "spotify": "https://open.spotify.com/artist/2kBfW8TL7PT7nQY9Oe4tLC",
       "photo": "artist-mercury.jpg"
@@ -65,10 +70,6 @@
     {
       "name": "LAMELO",
       "photo": "artist-lamelo.jpg"
-    },
-    {
-      "name": "PITFALL",
-      "photo": "artist-pitfall.jpg"
     },
     {
       "name": "HAINE",
